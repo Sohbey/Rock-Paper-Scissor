@@ -3,7 +3,9 @@ let userScore = 0;
 let compScore = 0;
 
 const choices = document.querySelectorAll(".choice");
-const message = document.querySelectorAll("#msg")
+const message = document.querySelectorAll("#msg");
+const userScoreCount = document.querySelector("#user-score");
+const compScoreCount = document.querySelector("#comp-score");
 
 
 // here we going to use Math.random function who select choice randomly from 0 to 2 bcoz we store our option in array so it become index now. So, we going to multiply it with 3, and we use Math.floor to remove all decimal numbers . 
@@ -17,12 +19,16 @@ const genCompChoice = () => {
 //here we show winner message
 const showWinner = (userWin, userChoice, compChoice) => {
     if (userWin) {
-        console.log("You Win!");
+        //if user win then increase in userScore number//
+        userScore++;
+        userScoreCount.innerText = userScore;
         msg.innerText = `You Win! ${userChoice} beats ${compChoice}`;
         msg.style.backgroundColor = "green";
     }
     else {
-        console.log("You Lose!");
+        //if comp win then increase in compScore number//
+        compScore++;
+        compScoreCount.innerText = compScore;
         msg.innerText = `You Lose! ${compChoice} beats ${userChoice}`;
         msg.style.backgroundColor = "red";
     }
@@ -38,11 +44,8 @@ const gameDraw = () => {
 
 //here we write playGame function which help computer to pick some random choice and then when user select one choice then this function also combine both selection and  decide who will WIN//
 const playGame = (userChoice) => {
-    console.log("User choice =", userChoice);
-
     //generate computer choice//
     const compChoice = genCompChoice();
-    console.log("Computer choice =", compChoice);
 
     // now we using if else method to decide who win and when game draw
     if (userChoice === compChoice ) {
